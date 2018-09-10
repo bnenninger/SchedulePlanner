@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane hgap="15.0" prefHeight="434.0" prefWidth="533.0" vgap="15.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="2">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Name" textAlignment="RIGHT" />
+            <TextField fx:id="nameBox" prefHeight="31.0" prefWidth="520.0" />
+         </children>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" disable="true" text="Class" textAlignment="RIGHT">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <ChoiceBox fx:id="classBox" disable="true" prefWidth="150.0" />
+         </children>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <Label disable="true" text="Type">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <ChoiceBox fx:id="assignmentTypeBox" disable="true" prefWidth="150.0" />
+         </children>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+         <children>
+            <Label text="Due Date" VBox.vgrow="NEVER">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <DatePicker fx:id="dueDatePicker" prefWidth="200.0" />
+         </children>
+         <GridPane.margin>
+            <Insets top="5.0" />
+         </GridPane.margin>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+      </VBox>
+      <HBox alignment="CENTER_RIGHT" GridPane.columnSpan="2" GridPane.rowIndex="5">
+         <children>
+            <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefWidth="100.0" text="Cancel">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="saveButton" alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" onAction="#save" prefWidth="100.0" text="Save" HBox.hgrow="NEVER">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <VBox prefHeight="102.0" prefWidth="503.0" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="2">
+         <children>
+            <Label text="Description" />
+            <TextArea prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+</GridPane>
