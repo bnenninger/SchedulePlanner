@@ -17,6 +17,10 @@ public abstract class UserInterface {
 //		show(window);
 //	}
 
+	//NOTE: TAKE CARE IF ADD CONSTRUCTOR
+	//Stage seems to not be able to be initialized within a constructor of a controller
+	//DOING SO CAUSES CRASHES
+	
 	private Stage window;
 	
 	protected void show(String title, EventHandler<WindowEvent> closeFunction, Modality modality) {

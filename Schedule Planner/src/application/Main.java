@@ -24,7 +24,7 @@ public class Main extends Application {
 		Button button = new Button("Click me");
 		button.setOnAction(e -> {
 			AssignmentEditUI edit = new AssignmentEditUI(test);
-			System.out.println(edit.show());
+			System.out.println(edit.showAndReturn());
 		});
 		StackPane layout = new StackPane();
 		layout.getChildren().add(button);

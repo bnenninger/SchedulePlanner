@@ -1,12 +1,6 @@
 package controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 
@@ -29,7 +23,7 @@ public class SaveAlert extends UserInterface {
 		return "/userInterfaceFXML/SaveAlert.fxml";
 	}
 
-	public SaveRequest display() {
+	public SaveRequest showAndReturn() {
 //		response = SaveRequest.CANCEL;
 		super.show("Schedule Planner", e -> {
 			e.consume();
@@ -39,19 +33,19 @@ public class SaveAlert extends UserInterface {
 	}
 	
 	@FXML
-	protected void cancel() {
+	private void cancel() {
 		response = SaveRequest.CANCEL;
 		close();
 	}
 	
 	@FXML
-	public void save() {
+	private void save() {
 		response = SaveRequest.SAVE;
 		close();
 	}
 	
 	@FXML
-	protected void dontSave() {
+	private void dontSave() {
 		response = SaveRequest.DONT_SAVE;
 		close();
 	}

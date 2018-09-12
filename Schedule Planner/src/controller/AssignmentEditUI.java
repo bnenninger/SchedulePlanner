@@ -1,25 +1,19 @@
 package controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.ResourceBundle;
 
 import assignmentStorage.Assignment;
 import assignmentStorage.AssignmentType;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 
 public class AssignmentEditUI extends UserInterface implements Initializable {
 
@@ -50,7 +44,7 @@ public class AssignmentEditUI extends UserInterface implements Initializable {
 		this(null);
 	}
 
-	public Assignment show() {
+	public Assignment showAndReturn() {
 		super.show("Edit Assignment", e -> {
 			e.consume();
 			closeButtonAction();
@@ -114,7 +108,7 @@ public class AssignmentEditUI extends UserInterface implements Initializable {
 			return;
 		}
 		SaveAlert alert = new SaveAlert();
-		SaveAlert.SaveRequest choice = alert.display();
+		SaveAlert.SaveRequest choice = alert.showAndReturn();
 		switch(choice) {
 		case SAVE:
 			save();
