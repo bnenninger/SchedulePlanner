@@ -10,9 +10,10 @@ public class Assignment implements Comparable<Assignment>, Serializable {
 	private AssignmentType type;
 	private String description;
 
-	public Assignment(String name, LocalDate dueDate) {
+	public Assignment(String name, LocalDate dueDate, AssignmentType type) {
 		this.name = name;
 		this.dueDate = dueDate;
+		this.type = type;
 	}
 
 	@Override
