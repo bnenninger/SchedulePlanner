@@ -26,12 +26,12 @@
       </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <Label disable="true" text="Type">
+            <Label text="Type">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <ChoiceBox fx:id="assignmentTypeBox" disable="true" prefWidth="150.0" />
+            <ChoiceBox fx:id="assignmentTypeBox" prefWidth="150.0" />
          </children>
       </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
