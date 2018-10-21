@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 
@@ -20,24 +21,20 @@ public class AssignmentEditUI extends UserInterface implements Initializable {
 	@FXML
 	protected TextField nameBox;
 	@FXML
-	protected ChoiceBox<String> assignmentTypeBox;
+	protected ChoiceBox<AssignmentType> assignmentTypeBox;
 	@FXML
 	protected DatePicker dueDatePicker;
+	@FXML
+	protected TextArea descriptionBox;
 	
 	@FXML
 	protected Button saveButton;
 
 	private Assignment assignment;
-	
-	private boolean nameModified;
-	private boolean assignmentTypeModified;
-	private boolean dueDateModified;	
+		
 
 	public AssignmentEditUI(Assignment assignment) {
 		this.assignment = assignment;
-		nameModified = false;
-		assignmentTypeModified = false;
-		dueDateModified = false;
 	}
 
 	public AssignmentEditUI() {
@@ -45,55 +42,52 @@ public class AssignmentEditUI extends UserInterface implements Initializable {
 	}
 
 	public Assignment showAndReturn() {
-		super.show("Edit Assignment", e -> {
+		super.show("Edit Assignment", e ->
+		{
 			e.consume();
 			closeButtonAction();
-		}, Modality.APPLICATION_MODAL);
+		},
+		Modality.APPLICATION_MODAL);
 		//show waits to return until window closed
 		return assignment;
 	}
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		dueDatePicker.setValue(getDate());
+		assignmentTypeBox.setItems(FXCollections.observableArrayList(AssignmentType.values()));
+		assignmentTypeBox.setValue(getAssignmentType());
 		nameBox.setText(getNameText());
-		assignmentTypeBox.setItems(FXCollections.observableArrayList(AssignmentType.getTypes()));
-		assignmentTypeBox.setValue(AssignmentType.ASSIGNMENT.toString());
+		dueDatePicker.setValue(getDate());
 		//adds listeners for changes in the name and due date
 		//deactivates save button when either is empty
-		nameBox.textProperty().addListener(e -> {
-			setSaveButtonDisable();
-			nameModified = true;});
-		dueDatePicker.setOnAction(e -> {
-			setSaveButtonDisable();
-			dueDateModified = true;});
-		//TODO make this action change the boolean value
-		assignmentTypeBox.setOnAction(e -> {assignmentTypeModified = true;});
-		assignmentTypeBox.setDisable(false);
-		setSaveButtonDisable();
+		nameBox.textProperty().addListener(e -> setSaveButtonDisable());
+		dueDatePicker.setOnAction(e -> setSaveButtonDisable());
+		setSaveButtonDisable();//sets proper initial save button state
+		descriptionBox.setText(getDescription());
 	}
 
 	@FXML
 	private void save() {
-		System.out.println("saved");
+		/*
+		 * saves all modified fields
+		 * avoids having boolean to store if a field has been modified
+		 */
+		System.out.println("saved");//TODO remove when class finished
 		String name = nameBox.getText();
+		AssignmentType type = assignmentTypeBox.getValue();
 		if(assignment != null) {
-			if(nameModified) {
-				assignment.setName(name);
-			}
-			if(dueDateModified) {
-				assignment.setDueDate(dueDatePicker.getValue());
-			}
-			if(assignmentTypeModified) {
-				assignment.setType(AssignmentType.valueOf(assignmentTypeBox.getValue().toUpperCase()));
-			}
+			assignment.setName(name);
+			assignment.setDueDate(dueDatePicker.getValue());
+			assignment.setType(type);
 		}
 		else {
-			assignment = new Assignment(name, dueDatePicker.getValue());
-			if(assignmentTypeBox.getValue() != null) {
-				assignment.setType(AssignmentType.valueOf(assignmentTypeBox.getValue().toUpperCase()));
-			}
+			assignment = new Assignment(name, dueDatePicker.getValue(), type);
 		}
+		assignment.setDescription(descriptionBox.getText());//passes null if null
 		super.close();
+	}
+	
+	public Assignment getAssignment() {
+		return assignment;
 	}
 
 	@Override
@@ -102,11 +96,6 @@ public class AssignmentEditUI extends UserInterface implements Initializable {
 	}
 
 	private void closeButtonAction() {
-		//if the assignment has not been modified or is not saveable, close without saving
-		if(!assignmentModified() || (!saveable() && assignmentModified())) {
-			close();
-			return;
-		}
 		SaveAlert alert = new SaveAlert();
 		SaveAlert.SaveRequest choice = alert.showAndReturn();
 		switch(choice) {
@@ -150,8 +139,17 @@ public class AssignmentEditUI extends UserInterface implements Initializable {
 		return LocalDate.now();
 	}
 	
-	private boolean assignmentModified() {
-		//TODO add the rest of the assignment fields
-		return nameModified || dueDateModified || assignmentTypeModified;
+	private AssignmentType getAssignmentType() {
+		if(assignment != null) {
+			return assignment.getType();
+		}
+		return AssignmentType.ASSIGNMENT;
+	}
+	
+	private String getDescription() {
+		if(assignment != null) {
+			return assignment.getDescription();
+		}
+		return "";
 	}
 }
