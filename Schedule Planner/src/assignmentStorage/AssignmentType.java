@@ -1,6 +1,8 @@
 package assignmentStorage;
 
-public enum AssignmentType {
+import java.io.Serializable;
+
+public enum AssignmentType implements Serializable {
 	ASSIGNMENT("Assignment"), STUDY("Study"), EXAM("Exam");
 	
 	private final String name;

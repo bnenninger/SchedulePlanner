@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Assignment implements Comparable<Assignment>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5825352641623013736L;
+	
 	private String name;
 	// TODO implement different class selection
 	private LocalDate dueDate;

@@ -8,6 +8,10 @@ import java.util.TreeSet;
 //TODO make this implementation faster
 //currently designed to be function
 public class AssignmentStorage implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -296259272907653448L;
 	private SortedSet<Assignment> assignments;
 	
 	public AssignmentStorage() {
