@@ -10,21 +10,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public abstract class UserInterface {
+public abstract class UserInterface extends Stage {
 
-//	protected void show() throws IOException {
-//		Stage window = new Stage();
-//		show(window);
-//	}
-
-	//NOTE: TAKE CARE IF ADD CONSTRUCTOR
+	//NOTE: TAKE CARE IF ADDING CONSTRUCTOR
 	//Stage seems to not be able to be initialized within a constructor of a controller
 	//DOING SO CAUSES CRASHES
 	
-	private Stage window;
 	
 	protected void show(String title, EventHandler<WindowEvent> closeFunction, Modality modality) {
-		window = new Stage();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(getFilePath()));
 		//pass controller to FXMLLoader
 		loader.setController(this);
@@ -36,18 +29,14 @@ public abstract class UserInterface {
 			System.out.println(getFilePath() + " failed to load.");
 		}
 		Scene scene = new Scene(root);
-		window.setScene(scene);
+		super.setScene(scene);
 		// blocks inputs to other windows until this window is closed
-		window.initModality(modality);
-		window.setTitle(title);
+		super.initModality(modality);
+		super.setTitle(title);
 		// sets window to save if closed or saved
-		window.setOnCloseRequest(closeFunction);
-		window.showAndWait();
+		super.setOnCloseRequest(closeFunction);
+		super.showAndWait();
 	}
 
 	protected abstract String getFilePath();
-	
-	public void close() {
-		window.close();
-	}
 }
