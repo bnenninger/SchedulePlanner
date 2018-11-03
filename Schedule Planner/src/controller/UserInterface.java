@@ -1,10 +1,6 @@
 package controller;
 
-import java.io.IOException;
-
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,17 +14,8 @@ public abstract class UserInterface extends Stage {
 	
 	
 	protected void show(String title, EventHandler<WindowEvent> closeFunction, Modality modality) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(getFilePath()));
-		//pass controller to FXMLLoader
-		loader.setController(this);
-		Parent root = null;
-		try {
-			root = loader.load();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println(getFilePath() + " failed to load.");
-		}
-		Scene scene = new Scene(root);
+		FXMLParentLoader loader = new FXMLParentLoader(getFilePath(), this);
+		Scene scene = new Scene(loader.getRoot());
 		super.setScene(scene);
 		// blocks inputs to other windows until this window is closed
 		super.initModality(modality);
